@@ -6,31 +6,35 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include "Case.h"
+
 using namespace std;
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	// input phase
 
+	// input phase
 	// how many cases there are?
 	unsigned int caseCount = 0;
 	cin >> caseCount;
 
-	cout << "Number of cases: " << caseCount << endl;
-
 	// now we capture input for every test case we have
 	for (unsigned int c = 0; c < caseCount; ++c)
 	{
+		// instance a new case
+		Case currentCase(c+1);
+
 		// read in the credits
 		unsigned int credits = 0;
 		cin >> credits;
+
+		// set the case credits
+		currentCase.SetCredits(credits);
+
 		// read in the number of items in the store
 		unsigned int itemCount = 0;
 		cin >> itemCount;
-
-		// declare price list
-		vector<unsigned int> priceList;
 
 		// for every item, read the price
 		for (unsigned int p = 0; p < itemCount; ++p)
@@ -38,23 +42,13 @@ int _tmain(int argc, _TCHAR* argv[])
 			// read the price
 			unsigned int price = 0;
 			cin >> price;
-			priceList.push_back(price);
+			currentCase.AddItemPrice(price);
 		}
 
-		// now that we captured the input, let's print them out
-		cout << "Credits: " << credits << endl;
-		cout << "Item Count: " << itemCount << endl;
-
-		for (vector<unsigned int>::iterator it = priceList.begin(); it < priceList.end(); ++it)
-		{
-			unsigned int currentPrice = *it;
-			cout << "\tPrice: " << currentPrice << " ";
-		}
-		cout << endl;
-
-
+		// now we have all the inputs we need for the case
+		// we can solve it
+		currentCase.Solve();
 	}
-
 
 	return 0;
 }
