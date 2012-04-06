@@ -49,7 +49,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		// we can solve it
 		currentCase.Solve();
 	}
-
 	return 0;
 }
 
